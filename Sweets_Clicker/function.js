@@ -95,13 +95,13 @@ let sidePanel = {
     draw: function () {
         ctx.beginPath();
         ctx.fillStyle = 'rgb(192,192,192)';
-        ctx.fillRect(1480, 0, 2000, 925);
+        ctx.fillRect(1480, 0, 1900, 925);
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.textAlign = "center";
         ctx.font = '30px Arial';
-        ctx.fillText(`*Vylepšení*`, 1660, 40);
+        ctx.fillText(`*Vylepšení*`, 1700, 40);
     }
 }
 
@@ -263,7 +263,7 @@ let cursor = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 170, 360, 90);
+        ctx.rect(1480, 170, 420, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'cursor.png';
@@ -275,8 +275,7 @@ let cursor = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Cursor: ${newCost} perníčků`, 1680, 210);
-        ctx.fillText(`máš: ${cursor.counter}`, 1720, 230);
+        ctx.fillText(`x1 Cursor: ${newCost} perníčků;             máš: ${cursor.counter}`, 1720, 210);
     },
 }
 
@@ -298,7 +297,7 @@ let elf = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 240, 360, 90);
+        ctx.rect(1480, 240, 420, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'elf.png';
@@ -310,8 +309,7 @@ let elf = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Elf: ${newCost} perníčků`, 1680, 280);
-        ctx.fillText(`máš: ${elf.counter}`, 1720, 300);
+        ctx.fillText(`x1 Elf: ${newCost} perníčků;                       máš: ${elf.counter}`, 1710, 280);
     },
     drawMidPanel: function (ctx) {
         ctx.beginPath();
@@ -348,7 +346,7 @@ let darek = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 310, 360, 90);
+        ctx.rect(1480, 310, 420, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = darecky[0];
@@ -360,8 +358,7 @@ let darek = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Darek: ${newCost} perníčků`, 1690, 350);
-        ctx.fillText(`máš: ${darek.counter}`, 1720, 370);
+        ctx.fillText(`x1 Darek: ${newCost} perníčků;        máš: ${darek.counter}`, 1730, 350);
     },
 
     drawMidPanel: function (ctx) {
@@ -397,7 +394,7 @@ let sanky = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 380, 360, 90);
+        ctx.rect(1480, 380, 420, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'sanky.png';
@@ -409,8 +406,7 @@ let sanky = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Sáňky: ${newCost} perníčků`, 1690, 420);
-        ctx.fillText(`máš: ${sanky.counter}`, 1720, 440);
+        ctx.fillText(`x1 Sáňky: ${newCost} perníčků;  máš: ${sanky.counter}`, 1740, 420);
     },
 
     drawMidPanel: function (ctx) {
@@ -433,7 +429,7 @@ let sanky = {
 // --------CUKROVÁ-TYČKA--------
 let candyStick = {
     cost: 5000,
-    x: 1530,
+    x: 1540,
     y: 60,
     width: 40,
     height: 80,
@@ -443,7 +439,7 @@ let candyStick = {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
         ctx.fillStyle = 'rgb(105,105,105)';
-        ctx.rect(1505, 50, 80, 100);
+        ctx.rect(1525, 50, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'CandyStick.png';
@@ -457,7 +453,7 @@ let candyStick = {
 // --------C-E-P-I-C-E--------
 let cepice = {
     cost: 10000,
-    x: 1630,
+    x: 1650,
     y: 60,
     width: 65,
     height: 95,
@@ -466,7 +462,7 @@ let cepice = {
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
-        ctx.rect(1620, 50, 80, 100);
+        ctx.rect(1640, 50, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'cepice.png';
@@ -480,7 +476,7 @@ let cepice = {
 // --------S-V-E-T-Y-L-K-A--------
 let svetylka = {
     cost: 15000,
-    x: 1685,
+    x: 1705,
     y: -15,
     width: 170,
     height: 170,
@@ -489,7 +485,7 @@ let svetylka = {
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
-        ctx.rect(1735, 50, 80, 100);
+        ctx.rect(1755, 50, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'svetlisci.png';
