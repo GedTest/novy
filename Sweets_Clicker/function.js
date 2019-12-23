@@ -95,7 +95,7 @@ let sidePanel = {
     draw: function () {
         ctx.beginPath();
         ctx.fillStyle = 'rgb(192,192,192)';
-        ctx.fillRect(1480, 0, 1840, 925);
+        ctx.fillRect(1480, 0, 2000, 925);
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = 'rgb(105,105,105)';
