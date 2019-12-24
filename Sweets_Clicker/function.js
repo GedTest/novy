@@ -20,17 +20,19 @@ function Game(width, height) {
     this.prerender = function () {
         mainPanel.draw();
         sidePanel.draw();
-        //midPanel.draw();
-        darek.drawMidPanel(ctx);
-        elf.drawMidPanel(ctx);
-        sanky.drawMidPanel(ctx);
+        midPanel.draw();
         cursor.draw(ctx);
         elf.draw(ctx);
         darek.draw(ctx);
         sanky.draw(ctx);
+        santa.draw(ctx);
         candyStick.draw(ctx);
         cepice.draw(ctx);
         svetylka.draw(ctx);
+
+        darek.drawMidPanel(ctx);
+        elf.drawMidPanel(ctx);
+        sanky.drawMidPanel(ctx);
     }
     Clicking(Player, ctx);
 }
@@ -100,8 +102,8 @@ let sidePanel = {
         ctx.stroke();
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.textAlign = "center";
-        ctx.font = '30px Arial';
-        ctx.fillText(`*Vylepšení*`, 1700, 40);
+        ctx.font = '700 30px Arial';
+        ctx.fillText(`*Vylepšení*`, 1700, 30);
     }
 }
 
@@ -275,7 +277,7 @@ let cursor = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Cursor: ${newCost} perníčků;             máš: ${cursor.counter}`, 1720, 210);
+        ctx.fillText(`x1 Cursor: ${newCost} perníčků;             máš: ${cursor.counter}`, 1740, 210);
     },
 }
 
@@ -309,7 +311,7 @@ let elf = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Elf: ${newCost} perníčků;                       máš: ${elf.counter}`, 1710, 280);
+        ctx.fillText(`x1 Elf: ${newCost} perníčků;                       máš: ${elf.counter}`, 1740, 280);
     },
     drawMidPanel: function (ctx) {
         ctx.beginPath();
@@ -358,7 +360,7 @@ let darek = {
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Darek: ${newCost} perníčků;        máš: ${darek.counter}`, 1730, 350);
+        ctx.fillText(`x1 Darek: ${newCost} perníčků;        máš: ${darek.counter}`, 1740, 350);
     },
 
     drawMidPanel: function (ctx) {
@@ -370,9 +372,7 @@ let darek = {
         ctx.stroke();
         for (i = 0; i < this.counter && i < 13; i++) {
             this.image2.src = darecky[Math.round(((Math.random())*5)-0.5)];
-            this.image2.onload = () => {
-                ctx.drawImage(this.image2, 560 + (i*70), 140, this.width, this.height);
-            };
+            //this.image2.onload = () => { ctx.drawImage(this.image2, 560 + (i*70), 140, this.width, this.height); };
             ctx.drawImage(this.image2, 560 + (i*70), 140, this.width, this.height);
         }
     }
@@ -413,7 +413,7 @@ let sanky = {
         ctx.beginPath();
         ctx.strokeStyle = 'black'
         ctx.lineWidth = 3
-        ctx.rect(550, 260, 950, 120);
+        ctx.rect(550, 260, 930, 120);
         ctx.fill();
         ctx.stroke();
         for (i = 0; i < this.counter && i < 9; i++) {
@@ -426,11 +426,39 @@ let sanky = {
     }
 }
 
+// --------S-A-N-T-A--------
+let santa = {
+    x: 1485,
+    y: 445,
+    width: 100,
+    height: 100,
+    image: new Image(),
+    draw: function (ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'rgb(105,105,105)';
+        ctx.lineWidth = 3
+        ctx.rect(1480, 450, 420, 90);
+        ctx.fill();
+        ctx.stroke();
+        this.image.src = 'santa.png';
+        this.image.onload = () => {
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        };
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+        //draw text
+        ctx.fillStyle = 'black';
+        ctx.font = '700 50px Arial';
+        ctx.fillText(`? ? ?`, 1740, 505);
+    }
+}
+
 // --------CUKROVÁ-TYČKA--------
 let candyStick = {
     cost: 5000,
     x: 1540,
-    y: 60,
+    y: 45,
     width: 40,
     height: 80,
     image: new Image(),
@@ -439,7 +467,7 @@ let candyStick = {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
         ctx.fillStyle = 'rgb(105,105,105)';
-        ctx.rect(1525, 50, 80, 100);
+        ctx.rect(1525, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'CandyStick.png';
@@ -447,6 +475,10 @@ let candyStick = {
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        //draw text
+        ctx.fillStyle = 'rgb(105,105,105)';
+        ctx.font = '700 20px Arial';
+        ctx.fillText(`${this.cost}`, 1565,160);
     }
 }
 
@@ -454,7 +486,7 @@ let candyStick = {
 let cepice = {
     cost: 10000,
     x: 1650,
-    y: 60,
+    y: 45,
     width: 65,
     height: 95,
     image: new Image(),
@@ -462,7 +494,7 @@ let cepice = {
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
-        ctx.rect(1640, 50, 80, 100);
+        ctx.rect(1640, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'cepice.png';
@@ -470,6 +502,10 @@ let cepice = {
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        //draw text
+        ctx.fillStyle = 'rgb(105,105,105)';
+        ctx.font = '700 20px Arial';
+        ctx.fillText(`${this.cost}`, 1680,160);
     }
 }
 
@@ -477,7 +513,7 @@ let cepice = {
 let svetylka = {
     cost: 15000,
     x: 1705,
-    y: -15,
+    y: -30,
     width: 170,
     height: 170,
     image: new Image(),
@@ -485,7 +521,7 @@ let svetylka = {
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
-        ctx.rect(1755, 50, 80, 100);
+        ctx.rect(1755, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'svetlisci.png';
@@ -493,6 +529,10 @@ let svetylka = {
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        //draw text
+        ctx.fillStyle = 'rgb(105,105,105)';
+        ctx.font = '700 20px Arial';
+        ctx.fillText(`${this.cost}`, 1795,160);
     }
 }
 
