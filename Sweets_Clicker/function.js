@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 //Player
 let Player = {
     name: 'NoName',
-    counter: 300000,
+    counter: 130000,
     getName: function () {
         Player.name = (prompt('ZADEJ JMÉNO'));
         console.log(Player.name);
@@ -25,14 +25,19 @@ function Game(width, height) {
         elf.draw(ctx);
         darek.draw(ctx);
         sanky.draw(ctx);
+        stromecek.draw(ctx);
         santa.draw(ctx);
         candyStick.draw(ctx);
         cepice.draw(ctx);
         svetylka.draw(ctx);
-
-        darek.drawMidPanel(ctx);
+        
+        cursor.drawMainPanel(ctx);
         elf.drawMidPanel(ctx);
+        darek.drawMidPanel(ctx);
         sanky.drawMidPanel(ctx);
+        stromecek.drawMidPanel(ctx);
+
+        
     }
     Clicking(Player, ctx);
 }
@@ -49,36 +54,40 @@ let mainPanel = {
     width: 400,
     height: 500,
     image: new Image(),
+    pozadi: new Image(),
 
     draw: function () {
         //draw a panel for sweets
         ctx.beginPath();
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = 'rgb(48, 48, 48)';
         ctx.fillRect(0, 0, 550, 925);
         ctx.stroke();
         ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.image.src = 'Pernicek.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        
+       this.pozadi.src = '/img/pozadi.jpg';
+       this.pozadi.onload = () => { ctx.drawImage(this.pozadi, 0, 60, 550, 750); };
+       ctx.drawImage(this.pozadi, 0, 60, 550, 750);
+
+        this.image.src = '/img/Pernicek.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw owner's nickname
         ctx.fillStyle = 'rgb(255,204,0)'
         ctx.textAlign = "center";
         ctx.font = '30px Arial';
-        ctx.fillText(`Pekárna hráče ${Player.name}`, 260, 170);
+        ctx.fillText(`Pekárna hráče ${Player.name}`, 260, 870);
 
         ctx.textAlign = "center";
         ctx.font = '30px Arial';
         if (Player.counter >= 0 && Player.counter < 1000) {
-            ctx.fillText(`Upekl jsi ${Player.counter.toFixed(1)} perníčků`, 260, 70);
+            ctx.fillText(`Upekl jsi ${Player.counter.toFixed(1)} perníčků`, 260, 40);
         }
         if (Player.counter >= 1000 && Player.counter < 1000000) {
-            ctx.fillText(`Upekl jsi ${(Player.counter/1000).toFixed(3)} tisíc(e) perníčků`, 260, 70);
+            ctx.fillText(`Upekl jsi ${(Player.counter/1000).toFixed(3)} tisíc(e) perníčků`, 260, 40);
         }
         if (Player.counter >= 1000000 && Player.counter < 1000000000) {
-            ctx.fillText(`Upekl jsi ${(Player.counter/1000000).toFixed(3)} milionů perníčků`, 260, 70);
+            ctx.fillText(`Upekl jsi ${(Player.counter/1000000).toFixed(3)} milionů perníčků`, 260, 40);
         }
     }
 }
@@ -145,9 +154,8 @@ function Clicking(Player, ctx) {
                 if (Player.counter >= Math.round(cursor.cost * (1.15 ** cursor.counter))) {
                     Player.counter -= Math.round(cursor.cost * (1.15 ** cursor.counter));
                     cursor.counter++;
-                    setInterval(() => {
-                        Player.counter += (0.1 * cursor.counter);
-                    }, 1000);
+                    cursor.drawMainPanel(ctx);
+                    setInterval(() => { Player.counter += (0.1 * cursor.counter); }, 1000);
                     clearCanvas();
                     game.prerender();
                 }
@@ -161,9 +169,7 @@ function Clicking(Player, ctx) {
                     Player.counter -= Math.round(elf.cost * (1.15 ** elf.counter));
                     elf.counter++;
                     elf.drawMidPanel(ctx);
-                    setInterval(() => {
-                        Player.counter += (1 * elf.counter);
-                    }, 1000);
+                    setInterval(() => { Player.counter += (1 * elf.counter); }, 1000);
                     clearCanvas();
                     game.prerender();
                 }
@@ -177,9 +183,7 @@ function Clicking(Player, ctx) {
                     Player.counter -= Math.round(darek.cost * (1.15 ** darek.counter));
                     darek.counter++;
                     darek.drawMidPanel(ctx);
-                    setInterval(() => {
-                        Player.counter += (8 * darek.counter);
-                    }, 1000);
+                    setInterval(() => { Player.counter += (8 * darek.counter); }, 1000);
                     clearCanvas();
                     game.prerender();
                 }
@@ -192,26 +196,33 @@ function Clicking(Player, ctx) {
                     Player.counter -= Math.round(sanky.cost * (1.15 ** sanky.counter));
                     sanky.counter++;
                     sanky.drawMidPanel(ctx);
-                    setInterval(() => {
-                        Player.counter += (47 * sanky.counter);
-                    }, 1000);
+                    setInterval(() => { Player.counter += (47 * sanky.counter); }, 1000);
                     clearCanvas();
                     game.prerender();
                 }
             }
         }));
+    //stromecek items
+    if (canvas.addEventListener("click", () => {
+        if (((x > stromecek.x) && (y > 505)) && ((x < (stromecek.x + 360)) && (y < (505 + stromecek.height)))) {
+            if (Player.counter >= Math.round(stromecek.cost * (1.15 ** stromecek.counter))) {
+                Player.counter -= Math.round(stromecek.cost * (1.15 ** stromecek.counter));
+                stromecek.counter++;
+                stromecek.drawMidPanel(ctx);
+                setInterval(() => { Player.counter += (260 * stromecek.counter); }, 1000);
+                clearCanvas();
+                game.prerender();
+            }
+        }
+    }));
 
     //candyStick item
     if (canvas.addEventListener("click", () => {
             if (((x > candyStick.x - 30) && (y > 100)) && ((x < (candyStick.x - 30 + candyStick.width + 50)) && (y < (100 + candyStick.height + 30)))) {
                 if (Player.counter >= candyStick.cost) {
                     Player.counter -= candyStick.cost;
-                    setInterval(() => {
-                        Player.counter += 100;
-                    }, 1000);
-                    setInterval(() => {
-                        mainPanel.image.src = 'Pernicek_w_candyStick.png';
-                    }, 0.0000000001);
+                    setInterval(() => { Player.counter += 100; }, 1000);
+                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_candyStick.png'; }, 0.0000000001);
                 }
             }
         }));
@@ -221,12 +232,8 @@ function Clicking(Player, ctx) {
             if (((x > cepice.x - 10) && (y > 100)) && ((x < (cepice.x - 10 + cepice.width + 20)) && (y < (100 + cepice.height + 30)))) {
                 if (Player.counter >= cepice.cost) {
                     Player.counter -= cepice.cost;;
-                    setInterval(() => {
-                        Player.counter += 250;
-                    }, 1000);
-                    setInterval(() => {
-                        mainPanel.image.src = 'Pernicek_w_hat.png';
-                    }, 1);
+                    setInterval(() => { Player.counter += 250; }, 1000);
+                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_hat.png'; }, 1);
                 }
             }
         }));
@@ -236,12 +243,8 @@ function Clicking(Player, ctx) {
             if (((x > svetylka.x + 50) && (y > 100)) && ((x < (svetylka.x + 50 + svetylka.width - 100)) && (y < (100 + svetylka.height + 30)))) {
                 if (Player.counter >= svetylka.cost) {
                     Player.counter -= svetylka.cost;;
-                    setInterval(() => {
-                        Player.counter += 500;
-                    }, 1000);
-                    setInterval(() => {
-                        mainPanel.image.src = 'Pernicek_w_lights.png';
-                    }, 0.0000000000001);
+                    setInterval(() => { Player.counter += 500; }, 1000);
+                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_lights.png'; }, 0.0000000000001);
                 }
             }
         }));
@@ -258,6 +261,7 @@ let cursor = {
     width: 30,
     height: 50,
     image: new Image(),
+    image2: new Image(),
 
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
@@ -268,21 +272,30 @@ let cursor = {
         ctx.rect(1480, 170, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'cursor.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/cursor.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Cursor: ${newCost} perníčků;             máš: ${cursor.counter}`, 1740, 210);
+        ctx.fillText(`x1 Cursor: ${newCost} perníčků; máš: ${cursor.counter}`, 1720, 210);
     },
+
+    drawMainPanel: function(ctx){
+        this.image2.src = '/img/cursor.png';
+        for (i = 0; i < this.counter && i < 5; i++) {
+            this.image2.onload = () => { ctx.drawImage(this.image2, 200 , 420+ (i*this.width), this.width/2, this.height/2); };
+            ctx.drawImage(this.image2, 200, 420+ (i*this.width), this.width/2, this.height/2);
+        }
+            for(i = 5; i < this.counter && i < 10; i++){
+                ctx.drawImage(this.image2, 330, 270 + (i*this.width), this.width/2, this.height/2);
+            }
+    }
 }
 
 // --------E-L-F--------
-let elfove = ['elf.png', 'elf1.png'];
+let elfove = ['/img/elf.png', '/img/elf1.png'];
 let elf = {
     counter: 0,
     cost: 100,
@@ -302,16 +315,14 @@ let elf = {
         ctx.rect(1480, 240, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'elf.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/elf.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Elf: ${newCost} perníčků;                       máš: ${elf.counter}`, 1740, 280);
+        ctx.fillText(`x1 Elf: ${newCost} perníčků; máš: ${elf.counter}`, 1710, 280);
     },
     drawMidPanel: function (ctx) {
         ctx.beginPath();
@@ -322,16 +333,14 @@ let elf = {
         ctx.stroke();
         for (i = 0; i < this.counter && i < 26; i++) {
             this.image1.src = elfove[Math.round(Math.random())];
-            this.image1.onload = () => {
-                ctx.drawImage(this.image1, 560 + (i*35), 10, this.width, this.height);
-            };
+            this.image1.onload = () => { ctx.drawImage(this.image1, 560 + (i*35), 10, this.width, this.height); };
             ctx.drawImage(this.image1, 560 + (i*35), 10, this.width, this.height);
         }
     }
 }
 
 // --------D-A-R-K-Y--------
-let darecky = ['darecek_cerveny.png', 'darecek_fialovy.png', 'darecek_modry.png', 'darecek_zeleny.png', 'darecek_zluty.png'];
+let darecky = ['/img/darecek_cerveny.png', '/img/darecek_fialovy.png', '/img/darecek_modry.png', '/img/darecek_zeleny.png', '/img/darecek_zluty.png'];
 let darek = {
     counter: 0,
     cost: 1100,
@@ -352,15 +361,13 @@ let darek = {
         ctx.fill();
         ctx.stroke();
         this.image.src = darecky[0];
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Darek: ${newCost} perníčků;        máš: ${darek.counter}`, 1740, 350);
+        ctx.fillText(`x1 Darek: ${newCost} perníčků; máš: ${darek.counter}`, 1730, 350);
     },
 
     drawMidPanel: function (ctx) {
@@ -397,16 +404,14 @@ let sanky = {
         ctx.rect(1480, 380, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'sanky.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/sanky.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw text
         ctx.fillStyle = 'rgb(255,204,0)';
         ctx.font = '18px Arial';
-        ctx.fillText(`x1 Sáňky: ${newCost} perníčků;  máš: ${sanky.counter}`, 1740, 420);
+        ctx.fillText(`x1 Sáňky: ${newCost} perníčků; máš: ${sanky.counter}`, 1740, 420);
     },
 
     drawMidPanel: function (ctx) {
@@ -416,12 +421,54 @@ let sanky = {
         ctx.rect(550, 260, 930, 120);
         ctx.fill();
         ctx.stroke();
-        for (i = 0; i < this.counter && i < 9; i++) {
-            this.image.src = 'sanky.png';
-            this.image.onload = () => {
-                ctx.drawImage(this.image, 560 + (i*100), 270, this.width, this.height);
-            };
+        for (i = 0; i < this.counter && i < 8; i++) {
+            this.image.src = '/img/sanky.png';
+            this.image.onload = () => { ctx.drawImage(this.image, 560 + (i*100), 270, this.width, this.height); };
             ctx.drawImage(this.image, 560 + (i*100), 270, this.width, this.height);
+        }
+    }
+}
+
+// --------S-T-R-O-M-E-C-E-K--------
+let stromecek = {
+    counter: 0,
+    cost: 130000,
+    x: 1500,
+    y: 450,
+    width: 70,
+    height: 80,
+    image: new Image(),
+
+    draw: function (ctx) {
+        let newCost = Math.round(this.cost * (1.15 ** this.counter));
+        ctx.beginPath();
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'rgb(105,105,105)';
+        ctx.lineWidth = 3
+        ctx.rect(1480, 450, 420, 90);
+        ctx.fill();
+        ctx.stroke();
+        this.image.src = '/img/stromecek.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+        //draw text
+        ctx.fillStyle = 'rgb(255,204,0)';
+        ctx.font = '18px Arial';
+        ctx.fillText(`x1 Stromeček: ${newCost} perníčků; máš: ${stromecek.counter}`, 1740, 490);
+    },
+
+    drawMidPanel: function (ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'black'
+        ctx.lineWidth = 3
+        ctx.rect(550, 390, 930, 120);
+        ctx.fill();
+        ctx.stroke();
+        for (i = 0; i < this.counter && i < 10; i++) {
+            this.image.src = '/img/stromecek.png';
+            this.image.onload = () => { ctx.drawImage(this.image, 560 + (i*100), 400, this.width, this.height); };
+            ctx.drawImage(this.image, 560 + (i*100), 400, this.width, this.height);
         }
     }
 }
@@ -429,7 +476,7 @@ let sanky = {
 // --------S-A-N-T-A--------
 let santa = {
     x: 1485,
-    y: 445,
+    y: 525,
     width: 100,
     height: 100,
     image: new Image(),
@@ -438,19 +485,17 @@ let santa = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 450, 420, 90);
+        ctx.rect(1480, 530, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'santa.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/santa.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
         //draw text
         ctx.fillStyle = 'black';
         ctx.font = '700 50px Arial';
-        ctx.fillText(`? ? ?`, 1740, 505);
+        ctx.fillText(`? ? ?`, 1740, 595);
     }
 }
 
@@ -470,10 +515,8 @@ let candyStick = {
         ctx.rect(1525, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'CandyStick.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/CandyStick.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
         ctx.fillStyle = 'rgb(105,105,105)';
@@ -497,10 +540,8 @@ let cepice = {
         ctx.rect(1640, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'cepice.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/cepice.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
         ctx.fillStyle = 'rgb(105,105,105)';
@@ -524,10 +565,8 @@ let svetylka = {
         ctx.rect(1755, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = 'svetlisci.png';
-        this.image.onload = () => {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        };
+        this.image.src = '/img/svetlisci.png';
+        this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
         ctx.fillStyle = 'rgb(105,105,105)';
@@ -537,6 +576,4 @@ let svetylka = {
 }
 
 game = new Game(1840, 925);
-setInterval(() => {
-    game.prerender();
-}, 1000);
+setInterval(() => { game.prerender(); }, 1000);
