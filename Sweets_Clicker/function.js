@@ -64,11 +64,11 @@ let mainPanel = {
         ctx.stroke();
         ctx.fillRect(this.x, this.y, this.width, this.height);
         
-       this.pozadi.src = '/img/pozadi.jpg';
+       this.pozadi.src = 'img/pozadi.jpg';
        this.pozadi.onload = () => { ctx.drawImage(this.pozadi, 0, 60, 550, 750); };
        ctx.drawImage(this.pozadi, 0, 60, 550, 750);
 
-        this.image.src = '/img/Pernicek.png';
+        this.image.src = 'img/Pernicek.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -133,12 +133,6 @@ function Clicking(Player, ctx) {
         x = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
         y = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
     }
-    /*
-        var posx = mainPanel.x,
-            posy = mainPanel.y;
-        var endx = posx + mainPanel.width;
-        var endy = posy + mainPanel.height;
-    */
 
     //clicking on gingerbread
     if (canvas.addEventListener("click", () => {
@@ -222,7 +216,7 @@ function Clicking(Player, ctx) {
                 if (Player.counter >= candyStick.cost) {
                     Player.counter -= candyStick.cost;
                     setInterval(() => { Player.counter += 100; }, 1000);
-                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_candyStick.png'; }, 0.0000000001);
+                    setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_candyStick.png'; }, 0.0000000001);
                 }
             }
         }));
@@ -233,7 +227,7 @@ function Clicking(Player, ctx) {
                 if (Player.counter >= cepice.cost) {
                     Player.counter -= cepice.cost;;
                     setInterval(() => { Player.counter += 250; }, 1000);
-                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_hat.png'; }, 1);
+                    setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_hat.png'; }, 1);
                 }
             }
         }));
@@ -244,7 +238,7 @@ function Clicking(Player, ctx) {
                 if (Player.counter >= svetylka.cost) {
                     Player.counter -= svetylka.cost;;
                     setInterval(() => { Player.counter += 500; }, 1000);
-                    setInterval(() => { mainPanel.image.src = '/img/Pernicek_w_lights.png'; }, 0.0000000000001);
+                    setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_lights.png'; }, 0.0000000000001);
                 }
             }
         }));
@@ -272,7 +266,7 @@ let cursor = {
         ctx.rect(1480, 170, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/cursor.png';
+        this.image.src = 'img/cursor.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -283,7 +277,7 @@ let cursor = {
     },
 
     drawMainPanel: function(ctx){
-        this.image2.src = '/img/cursor.png';
+        this.image2.src = 'img/cursor.png';
         for (i = 0; i < this.counter && i < 5; i++) {
             this.image2.onload = () => { ctx.drawImage(this.image2, 200 , 420+ (i*this.width), this.width/2, this.height/2); };
             ctx.drawImage(this.image2, 200, 420+ (i*this.width), this.width/2, this.height/2);
@@ -295,7 +289,7 @@ let cursor = {
 }
 
 // --------E-L-F--------
-let elfove = ['/img/elf.png', '/img/elf1.png'];
+let elfove = ['img/elf.png', 'img/elf1.png'];
 let elf = {
     counter: 0,
     cost: 100,
@@ -315,7 +309,7 @@ let elf = {
         ctx.rect(1480, 240, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/elf.png';
+        this.image.src = 'img/elf.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -340,7 +334,7 @@ let elf = {
 }
 
 // --------D-A-R-K-Y--------
-let darecky = ['/img/darecek_cerveny.png', '/img/darecek_fialovy.png', '/img/darecek_modry.png', '/img/darecek_zeleny.png', '/img/darecek_zluty.png'];
+let darecky = ['img/darecek_cerveny.png', 'img/darecek_fialovy.png', 'img/darecek_modry.png', 'img/darecek_zeleny.png', 'img/darecek_zluty.png'];
 let darek = {
     counter: 0,
     cost: 1100,
@@ -404,7 +398,7 @@ let sanky = {
         ctx.rect(1480, 380, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/sanky.png';
+        this.image.src = 'img/sanky.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -422,7 +416,7 @@ let sanky = {
         ctx.fill();
         ctx.stroke();
         for (i = 0; i < this.counter && i < 8; i++) {
-            this.image.src = '/img/sanky.png';
+            this.image.src = 'img/sanky.png';
             this.image.onload = () => { ctx.drawImage(this.image, 560 + (i*100), 270, this.width, this.height); };
             ctx.drawImage(this.image, 560 + (i*100), 270, this.width, this.height);
         }
@@ -448,7 +442,7 @@ let stromecek = {
         ctx.rect(1480, 450, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/stromecek.png';
+        this.image.src = 'img/stromecek.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -466,7 +460,7 @@ let stromecek = {
         ctx.fill();
         ctx.stroke();
         for (i = 0; i < this.counter && i < 10; i++) {
-            this.image.src = '/img/stromecek.png';
+            this.image.src = 'img/stromecek.png';
             this.image.onload = () => { ctx.drawImage(this.image, 560 + (i*100), 400, this.width, this.height); };
             ctx.drawImage(this.image, 560 + (i*100), 400, this.width, this.height);
         }
@@ -488,7 +482,7 @@ let santa = {
         ctx.rect(1480, 530, 420, 90);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/santa.png';
+        this.image.src = 'img/santa.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -515,7 +509,7 @@ let candyStick = {
         ctx.rect(1525, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/CandyStick.png';
+        this.image.src = 'img/CandyStick.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
@@ -540,7 +534,7 @@ let cepice = {
         ctx.rect(1640, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/cepice.png';
+        this.image.src = 'img/cepice.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
@@ -565,7 +559,7 @@ let svetylka = {
         ctx.rect(1755, 35, 80, 100);
         ctx.fill();
         ctx.stroke();
-        this.image.src = '/img/svetlisci.png';
+        this.image.src = 'img/svetlisci.png';
         this.image.onload = () => { ctx.drawImage(this.image, this.x, this.y, this.width, this.height); };
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         //draw text
