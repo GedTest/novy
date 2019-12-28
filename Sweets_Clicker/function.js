@@ -10,7 +10,9 @@ let Player = {
         console.log(Player.name);
     }
 }
-
+// *************************
+// ******GAME FUNCTION******
+// *************************
 function Game(width, height) {
     this.width = width;
     this.height = height;
@@ -41,8 +43,9 @@ function Game(width, height) {
     }
     Clicking(Player, ctx);
 }
+// *************************
 
-function clearCanvas() {
+function clearCanvas() {    // clear the canvas
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -256,7 +259,8 @@ let cursor = {
     height: 50,
     image: new Image(),
     image2: new Image(),
-
+    
+    //draw icons
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
         ctx.beginPath();
@@ -300,6 +304,8 @@ let elf = {
     image: new Image(),
     image1: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
         ctx.beginPath();
@@ -345,6 +351,8 @@ let darek = {
     image: new Image(),
     image2: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
         ctx.beginPath();
@@ -389,6 +397,8 @@ let sanky = {
     height: 100,
     image: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
         ctx.beginPath();
@@ -433,6 +443,8 @@ let stromecek = {
     height: 80,
     image: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         let newCost = Math.round(this.cost * (1.15 ** this.counter));
         ctx.beginPath();
@@ -474,6 +486,8 @@ let santa = {
     width: 100,
     height: 100,
     image: new Image(),
+    
+    //draw icon
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'black'
@@ -502,6 +516,8 @@ let candyStick = {
     height: 80,
     image: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
@@ -528,6 +544,8 @@ let cepice = {
     height: 95,
     image: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
@@ -553,6 +571,8 @@ let svetylka = {
     height: 170,
     image: new Image(),
 
+    
+    //draw icons
     draw: function (ctx) {
         ctx.beginPath();
         ctx.strokeStyle = 'rgb(255,204,0)'
@@ -568,6 +588,6 @@ let svetylka = {
         ctx.fillText(`${this.cost}`, 1795,160);
     }
 }
-
+// plays the game
 game = new Game(1840, 925);
 setInterval(() => { game.prerender(); }, 1000);
