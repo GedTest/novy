@@ -135,15 +135,15 @@ function Clicking(Player, ctx) {
     }
 
     //clicking on gingerbread
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > mainPanel.x) && (y > mainPanel.y)) && ((x < (mainPanel.x + mainPanel.width)) && (y < (mainPanel.y + mainPanel.height)))) {
                 Player.counter++;
                 clearCanvas();
                 game.prerender();
             }
-        }));
+        });
     //cursor items
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > cursor.x) && (y > 220)) && ((x < (cursor.x + 360)) && (y < (220 + 75)))) {
                 if (Player.counter >= Math.round(cursor.cost * (1.15 ** cursor.counter))) {
                     Player.counter -= Math.round(cursor.cost * (1.15 ** cursor.counter));
@@ -154,10 +154,10 @@ function Clicking(Player, ctx) {
                     game.prerender();
                 }
             }
-        }));
+        });
 
     //elf items
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > elf.x) && (y > 300)) && ((x < (elf.x + 360)) && (y < (300 + elf.height)))) {
                 if (Player.counter >= Math.round(elf.cost * (1.15 ** elf.counter))) {
                     Player.counter -= Math.round(elf.cost * (1.15 ** elf.counter));
@@ -168,10 +168,10 @@ function Clicking(Player, ctx) {
                     game.prerender();
                 }
             }
-        }));
+        });
 
     //darek items
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > darek.x) && (y > 360)) && ((x < (darek.x + 360)) && (y < (360 + 80)))) {
                 if (Player.counter >= Math.round(darek.cost * (1.15 ** darek.counter))) {
                     Player.counter -= Math.round(darek.cost * (1.15 ** darek.counter));
@@ -182,9 +182,9 @@ function Clicking(Player, ctx) {
                     game.prerender();
                 }
             }
-        }));
+        });
     //sanky items
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > sanky.x) && (y > 430)) && ((x < (sanky.x + 360)) && (y < (430 + sanky.height)))) {
                 if (Player.counter >= Math.round(sanky.cost * (1.15 ** sanky.counter))) {
                     Player.counter -= Math.round(sanky.cost * (1.15 ** sanky.counter));
@@ -195,9 +195,9 @@ function Clicking(Player, ctx) {
                     game.prerender();
                 }
             }
-        }));
+        });
     //stromecek items
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
         if (((x > stromecek.x) && (y > 505)) && ((x < (stromecek.x + 360)) && (y < (505 + stromecek.height)))) {
             if (Player.counter >= Math.round(stromecek.cost * (1.15 ** stromecek.counter))) {
                 Player.counter -= Math.round(stromecek.cost * (1.15 ** stromecek.counter));
@@ -208,10 +208,10 @@ function Clicking(Player, ctx) {
                 game.prerender();
             }
         }
-    }));
+    });
 
     //candyStick item
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > candyStick.x - 30) && (y > 100)) && ((x < (candyStick.x - 30 + candyStick.width + 50)) && (y < (100 + candyStick.height + 30)))) {
                 if (Player.counter >= candyStick.cost) {
                     Player.counter -= candyStick.cost;
@@ -219,10 +219,10 @@ function Clicking(Player, ctx) {
                     setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_candyStick.png'; }, 0.0000000001);
                 }
             }
-        }));
+        });
 
     //cepice item
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > cepice.x - 10) && (y > 100)) && ((x < (cepice.x - 10 + cepice.width + 20)) && (y < (100 + cepice.height + 30)))) {
                 if (Player.counter >= cepice.cost) {
                     Player.counter -= cepice.cost;;
@@ -230,10 +230,10 @@ function Clicking(Player, ctx) {
                     setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_hat.png'; }, 1);
                 }
             }
-        }));
+        });
 
     //svetylka item
-    if (canvas.addEventListener("click", () => {
+    canvas.addEventListener("click", () => {
             if (((x > svetylka.x + 50) && (y > 100)) && ((x < (svetylka.x + 50 + svetylka.width - 100)) && (y < (100 + svetylka.height + 30)))) {
                 if (Player.counter >= svetylka.cost) {
                     Player.counter -= svetylka.cost;;
@@ -241,7 +241,7 @@ function Clicking(Player, ctx) {
                     setInterval(() => { mainPanel.image.src = 'img/Pernicek_w_lights.png'; }, 0.0000000000001);
                 }
             }
-        }));
+        });
 }
 
 
