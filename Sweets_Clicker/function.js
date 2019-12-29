@@ -281,7 +281,7 @@ let cursor = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 170, 420, 90);
+        ctx.rect(1480, 170, 440, 90);
         ctx.fill();
         ctx.stroke();
         
@@ -324,7 +324,7 @@ let elf = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 240, 420, 90);
+        ctx.rect(1480, 240, 440, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'img/elf.png';
@@ -370,7 +370,7 @@ let darek = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 310, 420, 90);
+        ctx.rect(1480, 310, 440, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = darecky[0];
@@ -415,7 +415,7 @@ let sanky = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 380, 420, 90);
+        ctx.rect(1480, 380, 440, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'img/sanky.png';
@@ -459,7 +459,7 @@ let stromecek = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 450, 420, 90);
+        ctx.rect(1480, 450, 440, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'img/stromecek.png';
@@ -501,7 +501,7 @@ let santa = {
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'rgb(105,105,105)';
         ctx.lineWidth = 3
-        ctx.rect(1480, 530, 420, 90);
+        ctx.rect(1480, 530, 440, 90);
         ctx.fill();
         ctx.stroke();
         this.image.src = 'img/santa.png';
